@@ -2,6 +2,8 @@
 
 BattleState::BattleState():
         InputHandler(LD_DEBUG),
+        m_mapView(),
+        m_HUDView(),
         m_HUD(LD_DEBUG, this),
         m_map(18,10)
 {
@@ -13,8 +15,12 @@ BattleState::~BattleState()
     // Empty
 }
 
-void BattleState::init()
+void BattleState::init(sf::RenderWindow *window)
 {
+    m_HUDView = window->getDefaultView();
+    m_mapView.setSize(sf::Vector2f(WINDOW_LENGTH, WINDOW_WIDTH));
+    m_mapView.setCenter(sf::Vector2f(WINDOW_LENGTH/2 - (WINDOW_LENGTH - 18 * TILE_SIZE)/2,
+                                  WINDOW_WIDTH/2 - (WINDOW_WIDTH - 10 * TILE_SIZE)/2));
     m_map.init();
 }
 
@@ -40,8 +46,8 @@ void BattleState::onPollEvent(sf::Event &event)
 
 void BattleState::draw(sf::RenderWindow *window)
 {
-    sf::View view(sf::FloatRect(200, 200, 300, 200));
-    window->setView(view);
+    window->setView(m_mapView);
     m_map.draw(window);
+    window->setView(m_HUDView);
     m_HUD.draw(window);
 }

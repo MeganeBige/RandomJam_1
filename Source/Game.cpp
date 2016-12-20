@@ -1,10 +1,11 @@
 #include "Game.hpp"
+#include "Constant.hpp"
 #include "Memory/ResourceLoader.hpp"
 #include "GameState/BattleState.hpp"
 #include "Music/MusicManager.hpp"
 
 Game::Game():
-    m_window(sf::VideoMode(1280, 720), "RandomJam 1")
+    m_window(sf::VideoMode(WINDOW_LENGTH, WINDOW_WIDTH), "RandomJam 1")
 {
     // Empty
 }
@@ -17,7 +18,7 @@ void Game::init()
     LoadAll();
 
     StateMachine::Instance()->window = &m_window;
-    BattleState::Instance()->init();
+    BattleState::Instance()->init(&m_window);
     StateMachine::Instance()->pushState(BattleState::Instance());
 
     m_window.setFramerateLimit(60);

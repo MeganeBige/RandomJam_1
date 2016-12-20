@@ -12,7 +12,7 @@ public:
     explicit BattleState();
     virtual ~BattleState();
 
-    void init();
+    void init(sf::RenderWindow *window);
     virtual bool onEnter();
     virtual bool onExit();
     virtual void update(double time);
@@ -20,6 +20,8 @@ public:
     virtual void draw(sf::RenderWindow *window);
 
 private:
+    sf::View m_mapView;
+    sf::View m_HUDView;
     BattleHUD m_HUD;
     Map m_map;
 };
