@@ -29,6 +29,7 @@
 ## Plugin-specific files:
 
 # IntelliJ
+.idea/
 /out/
 
 # mpeltonen/sbt-idea plugin
@@ -72,10 +73,13 @@ fabric.properties
 *.lib
 
 # Executables
+Bin/
 *.exe
 *.out
 *.app
 ### CMake template
+cmake-build-debug/
+CMakeConfig.cmake
 CMakeCache.txt
 CMakeFiles
 CMakeScripts
